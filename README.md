@@ -2,6 +2,7 @@
 
 coderbyte is a RESTful API that supports the posts functionality of Facebook..
 
+[![Coverage Status](https://coveralls.io/repos/github/donaldcrane/coderbyte/badge.svg)](https://coveralls.io/github/donaldcrane/coderbyte)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b4882362c1bcc9028d24/maintainability)](https://codeclimate.com/github/donaldcrane/coderbyte/maintainability)
 [![](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://houndci.com)
 [![NodeJS CI](https://github.com/donaldcrane/coderbyte/actions/workflows/node.js.yml/badge.svg)](https://github.com/donaldcrane/coderbyte/actions/workflows/node.js.yml)
