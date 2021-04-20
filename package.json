@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A RESTful API that supports the posts functionality of Facebook.",
   "main": "app.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "clean": "npm rm -rf build && npm run build-babel",
     "build-babel": "babel -d ./build ./src -s",
