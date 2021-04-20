@@ -15,8 +15,11 @@ A detailed documentation of the api can be found here: [API Documentation](https
 
 - Clone the project
 - cd into the project's folder and run npm install to install dependencies
-- Create a .env file and add PORT value, JWT_KEY, COOKIE_KEY to it
-- Run npm run start:dev to start the server
+- Create a .env file and add PORT value, JWT_KEY, COOKIE_KEY, DEV_DATABASE_URL for development and TEST_DATABASE_URL for testing
+
+- Run npm run migrate to migrate the database
+- Run npm run seed to seed data into the database
+- Run npm run dev to start the server
 
 # HTTP Requests
 
@@ -24,6 +27,8 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 
 - POST Create a resource
 - GET Get a resource or list of resources
+- PATCH updates a resource or list of resources
+- DELETE deletes a resource or list of resources
 - For POST, the body of your request must be a JSON payload.
 
 # HTTP Response Codes
