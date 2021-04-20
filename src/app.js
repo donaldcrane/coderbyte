@@ -20,7 +20,7 @@ app.use(cookieSession({
 app.use("/api/v1", router);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to coderbyte post app");
+  res.send("Welcome to coderbyte-task post app");
 });
 
 app.listen(port, () => {
