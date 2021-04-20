@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import db from "../../models/index";
-import { user4 } from "./user-sign-in-test-data";
+import { user4, user6 } from "./user-sign-in-test-data";
 import {
   post, post2, post3, post4, post5
 } from "./post-data";
@@ -70,7 +70,7 @@ describe("Update post", () => {
       .request(server)
       .post("/api/v1/users/signin")
       .set("Accept", "application/json")
-      .send(user4)
+      .send(user6)
       .end((err, res) => {
         if (err) throw err;
         userToken = res.body.data;
@@ -96,10 +96,23 @@ describe("Update post", () => {
       .patch("/api/v1/post/8d58")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
-      .send({ name: "Duplex" })
+      .send({ post: "i live in a Duplex" })
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.error).to.equal("ID must be a UUID");
+        done();
+      });
+  });
+  it("should not allow user update a post with that does not belong to him", done => {
+    chai
+      .request(server)
+      .patch("/api/v1/post/a430e505-937b-4908-9422-7aa57044e85a")
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .send({ post: "I am loving this feeling" })
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body.error).to.equal("Access Denied.");
         done();
       });
   });
@@ -109,7 +122,7 @@ describe("Update post", () => {
       .patch("/api/v1/post/8d585465-cd80-4030-b665-bdc3bbd3e578")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
-      .send({ lanlordpost: "He is a kind person" })
+      .send({ post: "He is a kind person" })
       .end((err, res) => {
         expect(res).to.have.status(404);
         expect(res.body.error).to.equal("Post not found.");
@@ -119,23 +132,13 @@ describe("Update post", () => {
 });
 
 describe("Delete post", () => {
-  beforeEach(async () => {
-    await db.Posts.destroy({
-      where: {
-      },
-      trancate: {
-        cascade: true,
-      },
-    });
-    await db.Posts.create(post4);
-  });
   let userToken;
   before(done => {
     chai
       .request(server)
       .post("/api/v1/users/signin")
       .set("Accept", "application/json")
-      .send(user4)
+      .send(user6)
       .end((err, res) => {
         if (err) throw err;
         userToken = res.body.data;
@@ -150,6 +153,17 @@ describe("Delete post", () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.equal("Successfully Deleted Post.");
+        done();
+      });
+  });
+  it("should not allow user Delete a post with that does not belong to him", done => {
+    chai
+      .request(server)
+      .delete("/api/v1/post/a430e505-937b-4908-9422-7aa57044e85a")
+      .set("Authorization", `Bearer ${userToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body.error).to.equal("Access Denied.");
         done();
       });
   });

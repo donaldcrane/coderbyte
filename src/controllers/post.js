@@ -88,7 +88,7 @@ export default class PostController {
       if (error) return res.status(400).json({ status: 400, error: error.message });
       const Post = await getPost(id);
       if (!Post) return res.status(404).json({ status: 404, error: "Post not found." });
-      if (Post.userId !== userId) return res.status(401).json({ status: 401, error: "Access Denied" });
+      if (Post.userId !== userId) return res.status(401).json({ status: 401, error: "Access Denied." });
       await deletePost(id);
       return res.status(200).json({
         status: 200,
@@ -141,7 +141,7 @@ export default class PostController {
       if (error) return res.status(400).json({ status: 400, error: error.message });
       const Post = await PostServices.getPost(id);
       if (!Post) return res.status(404).json({ status: 404, error: "Post not found." });
-      if (Post.userId !== userId) return res.status(401).json({ status: 401, error: "Access Denied" });
+      if (Post.userId !== userId) return res.status(401).json({ status: 401, error: "Access Denied." });
       const newPost = await updatePost(id, req.body);
       return res.status(200).json({
         status: 200,
