@@ -9,7 +9,7 @@ coderbyte is a RESTful API that supports the posts functionality of Facebook..
 
 # Documentation
 
-A detailed documentation of the api can be found here: [API Documentation]()
+A detailed documentation of the api can be found here: [API Documentation](https://documenter.getpostman.com/view/11971882/TzJu8wwe)
 
 **Run Project Locally**
 
